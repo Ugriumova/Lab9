@@ -2,11 +2,12 @@
 #define _USE_MATH_DEFINES 
 #include <stdio.h> 
 #include <locale.h>  
+#include <math.h>
 
 double F1(double x) {
 	double y;
-	if (x <= 3) y = (x*x) - (3 * x) + 9;
-	if (x > 3) y = 1 / ((x*x*x) + 3);
+	if (x <= 3) y = (x * x) - (3 * x) + 9;
+	if (x > 3) y = 1 / ((x * x * x) + 3);
 
 	return y;
 }
@@ -16,7 +17,8 @@ double F2(double x) {
 
 	return y;
 }
-int factorial(int N1) {
+int factorial(int N1)
+{
 	int f = 1;
 	for (int i = 1; i <= N1; i++) {
 		f = f * i;
@@ -24,37 +26,73 @@ int factorial(int N1) {
 	return f;
 }
 double sin_n(double x1, int N) {
-	double y1,k;
-	int factorial(int N1); //N1 - число факториала, N - число  суммируемых k-х членов ряда
-	int N1 = (2 * k) - 1;
-	int l = factorial(N1);
-	y1 = x1 + ((pow(-1, k - 1) * (pow(x1, (2 * k) - 1 / l)))) * N;
-}
-//double sin_eps(double x, double eps) {
+	double s = 0.0;
+	double ch = x1;
+	int zn = 1;
+	int factorial(int N1);
 
+	for (int k = 1; k <= N; k++)
+	{
+		s = s + ch;
+		ch = pow(-1, k - 1) * (pow(x1, (2 * k) - 1)) / (factorial((2 * k) - 1));
+	}
+
+	return s;
 }
- double main()
-{   //задание 1
+
+double sin_eps(double x1, double eps) 
+{
+	double s = 0.0;
+	double ch = x1;
+	int zn = 1;
+	int k = 1;
+
+	while (fabs(ch) >= eps) {
+		s += ch;
+		ch = -ch * x1 * x1 / ((2 * k) * (2 * k + 1));
+		zn *= -1;  
+		k++;
+	}
+
+	return s;
+}
+double main()
+{   
+	//задание 1
 	double F1(double x);
 	double F2(double x);
-	double c,d,x;
+	double c, d, x;
 	setlocale(LC_ALL, "RUS");
 	puts("Введите значение x");
 	scanf_s("%lf", &x);
 	c = F1(x);
 	d = F2(x);
 	printf("F1(x)=%lf , F2(x)=%lf\n ", c, d);
-	printf("Произведение - %lf, разность квадратов - %lf, удвоенная сумма - %lf\n", c * d, (c*c) - (d*d), 2 * (c + d));
+	printf("Произведение - %lf, разность квадратов - %lf, удвоенная сумма - %lf\n", c * d, (c * c) - (d * d), 2 * (c + d));
 
-	//задание 2
-	double sin_n(double x1, int N);
-	int N, k;
-	double x1, h;
+	//задание 2.1
+	double x1;
 	puts("Введите значение x");
 	scanf_s("%lf", &x1);
 	printf("sin(x) = %2.2lf (стандартная библиотека Си)\n", sin(x1));
-	puts("Введите значение x, N и k");
-	scanf_s("%lf%d%d", &x1, &N, &k);
-	h = sin_n(x1, N);
-	printf("sin(x) = %lf (вычисление значений как сумму ряда)\n", h);
+
+	//задание 2.2
+	double sin_n(double x1, int N);
+	int N;
+	printf("Введите число членов ряда N\n");
+	scanf_s("%d", &N);
+	double res1 = sin_n(x1, N);
+	printf("sin(%.2f) = %.6f\n", x1, res1);
+
+	
+	//задание 2.3
+	double eps;
+	double sin_eps(double x1, double eps);
+	printf("Введите точность eps: ");
+	scanf("%lf", &eps);
+	double res2 = sin_eps(x, eps);
+
+	printf("sin(%.2f) = %.6f\n", x, res2);
+
+	//задание 3
 }
