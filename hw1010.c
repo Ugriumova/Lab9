@@ -101,7 +101,7 @@ int main()
             printf("Площадь круга = %f", area_round(r));
             break;
         case 2:
-            printf("Круг");
+            void name(int n);
             break;
         case 3:
             printf("Введите радиус круга\n");
@@ -122,7 +122,7 @@ int main()
             printf("Площадь прямоугольника = %f", area_rectangle(a, b));
             break;
         case 2:
-            printf("Прямоугольник");
+            void name(int n);
             break;
         case 3:
             printf("Введите стороны прямоугольника\n");
@@ -143,7 +143,7 @@ int main()
             printf("Площадь прямоугольника = %f", area_triangle(a, b, c));
             break;
         case 2:
-            printf("Треугольник");
+            void name(int n);
             break;
         case 3:
             printf("Введите стороны треугольника\n");
