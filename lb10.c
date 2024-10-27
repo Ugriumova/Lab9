@@ -45,77 +45,6 @@ double sin_eps(double x, double eps)
 	}
 	return res;
 }
-float area_round(float r) 
-{
-    return M_PI * r * r;
-}
-float area_rectangle(float a, float b) 
-{
-    return a * b;
-}
-float area_triangle(float a, float b, float c) 
-{     
-    float s = (a + b + c) / 2;
-    return sqrt(s * (s - a) * (s - b) * (s - c));
-}
-void draw_rectangle(int a, int b) 
-{
-    for (int i = 0; i < b; i++) 
-    {
-        for (int j = 0; j < a; j++) 
-        {
-            printf("*");
-        }
-        printf(" \n");
-    }
-}
-void draw_triangle(int a, int b, char symbol) 
-{
-    for (int i = 0; i < a; i++) {
-        int Symbols1 = (i * b) / a;
-        for (int j = 0; j < Symbols1; j++) 
-        {
-            printf("%c", symbol);
-        }
-        printf("\n");
-    }
-}
-void draw_round(char symbol, float r) 
-{
-    int diameter = (int)(r * 2);
-    for (int i = 0; i < diameter; i++) 
-    {
-        for (int j = 0; j < diameter; j++) 
-        {
-            float distance = sqrt((i - r) * (i - r) + (j - r) * (j - r));
-            if (distance < r) {
-                printf("%c ", symbol);
-            }
-            else {
-                printf(" ");
-            }
-        }
-        printf(" \n");
-    }
-}
-void name(int sides)
-{
-    switch (sides)
-    {
-    case 3:
-        printf("Фигура: прямоугольный треугольник \n");
-        break;
-    case 4:
-        printf("Фигура: Прямоугольник \n");
-        break;
-    case 1:
-        printf("Фигура: Круг \n");
-        break;
-    default:
-        printf("Неизвестная фигура \n");
-        break;
-    }
-}
 
 double main()
 {
@@ -145,41 +74,7 @@ double main()
 	printf("sin_eps(%lf, %lf) = %lf\n", x1, eps, sin_eps(x1, eps));
 	return 0;
 
-	//задание 3
-    int sides;
-    float a, b, c1, r;
-    char symbol;
-    printf("Выберите фигуру (1 - Круг, 2 - Прямоугольник, 3 - Треугольник): ");
-    scanf_s("%d", &sides);
-    name(sides);
-    switch (sides) 
-    {
-        case 1:
-            printf("Введите радиус круга: ");
-            scanf_s("%f", &r);
-            printf("Площадь круга: %.2f \n", area_round(r));
-            printf("Введите символ для рисования: ");
-            scanf_s(" %c", &symbol);
-            draw_round(symbol, r);
-            break;
-        case 2:
-            printf("Введите длину и ширину прямоугольника: ");
-            scanf_s("%f %f", &a, &b);
-            printf("Площадь прямоугольника: %.2f \n", area_rectangle(a, b));
-            draw_rectangle((int)a, (int)b);
-            break;
-        case 3:
-            printf("Введите длины сторон треугольника: ");
-            scanf_s("%f%f%f", &a, &b, &c1);
-            printf("Площадь треугольника: %.2f \n", area_triangle(a, b, c1));
-            printf("Введите символ для рисования: ");
-            scanf_s(" %c", &symbol);
-            draw_triangle(a, b, symbol);
-            break;
-        default:
-            printf("Некорректный выбор. \n");
-            break;
-    }
+	
 
         return 0;
    
