@@ -103,7 +103,11 @@ void main()
 		printf("%d\n", s);
 
 		printf("Продолжить ? (Да - y, нет - n)");
-		if ((a = getchar()) == 'n') break;
+		if ((a = getchar()) == 'n')
+		{
+			break;
+		}
+		while (getchar() != '\n');
 
 	}
 
